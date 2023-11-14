@@ -5,8 +5,8 @@ import Nav from '../components/Nav.astro';
 
 <Layout title="Atelier Rafael Monteiro">
 	<main>
+		<Nav />
 		<section class="relative w-full h-screen overflow-hidden">
-			<Nav />
 			<video
 				class="absolute top-0 left-0 w-full h-full object-cover"
 				src="/BackgroundHomeRafael.mp4"
@@ -15,10 +15,18 @@ import Nav from '../components/Nav.astro';
 				muted
 				playsinline >
 			</video>
+
+			<div class="absolute bottom-4 w-full text-left drop-shadow-sm">
+				<h1 class="text-9xl font-light text-custom-gray-4 mb-2">Atelier</h1>
+				<h2 class="text-9xl font-light text-custom-gray-4">Rafael Monteiro</h2>
+			</div>
+		</section>
+		<section>
+			<p>Section 2</p>
 		</section>
 	</main>
 </Layout>
 
 <style>
-
+	/* Additional styles if needed */
 </style>
