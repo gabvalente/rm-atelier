@@ -16,17 +16,18 @@ import Nav from '../components/Nav.astro';
 				playsinline >
 			</video>
 
-			<div class="absolute bottom-4 w-full text-left drop-shadow-sm">
-				<h1 class="text-9xl font-light text-custom-gray-4 mb-2">Atelier</h1>
-				<h2 class="text-9xl font-light text-custom-gray-4">Rafael Monteiro</h2>
+			<div class="absolute bottom-8 left-8 md:left-32 w-full">
+				<h1 class="text-8xl font-light text-custom-gray-3 mb-2 header-shadow">Atelier</h1>
+				<h2 class="text-9xl font-light text-custom-gray-3 header-shadow">Rafael Monteiro</h2>
 			</div>
 		</section>
 		<section>
-			<p>Section 2</p>
 		</section>
 	</main>
 </Layout>
 
 <style>
-	/* Additional styles if needed */
+	.header-shadow {
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	}
 </style>
