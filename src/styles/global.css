@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* Tailwind directives below */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .menu-link {
+      @apply text-xl font-normal;
+      font-family: 'Lato', sans-serif;
+    }
+  }
+  
