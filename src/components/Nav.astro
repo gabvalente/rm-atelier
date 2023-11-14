@@ -1,15 +1,14 @@
 ---
 import ResponsiveMenu from './ResponsiveMenu.jsx';
-
 ---
 
-<nav class="flex items-center justify-between w-full px-8 py-4 absolute top-5 bg-transparent z-10">
-    <div class="container mx-auto grid grid-cols-12 gap-4">
+<nav class="flex items-center justify-between w-full px-8 py-4 absolute top-5 bg-transparent z-10 shadow-lg">
+    <div class="container mx-auto grid grid-cols-12 gap-4 items-center">
       <a href="/" class="col-span-3 flex items-center justify-start">
         <img src="/Logo.svg" alt="Logo" class="h-12">
       </a>
       
-        <ResponsiveMenu client:load />
+      <ResponsiveMenu client:only="react" />
  
     </div>
 </nav>
