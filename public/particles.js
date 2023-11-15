@@ -1215,12 +1215,12 @@ var pJS = function(tag_id, params){
           return color_value;
         });
 
-    /* prepare to create img with colored svg */
+    /* prepare to create images with colored svg */
     var svg = new Blob([coloredSvgXml], {type: 'image/svg+xml;charset=utf-8'}),
         DOMURL = window.URL || window.webkitURL || window,
         url = DOMURL.createObjectURL(svg);
 
-    /* create particle img obj */
+    /* create particle images obj */
     var img = new Image();
     img.addEventListener('load', function(){
       p.img.obj = img;
