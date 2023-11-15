@@ -1,7 +1,5 @@
 <section class="relative w-full h-screen overflow-hidden">
     <div class="container mx-auto px-4 md:px-6 lg:px-8 h-full grid grid-cols-12">
-        <div id="particles-js" class="col-span-12 absolute top-0 left-0 w-full h-full z-10"></div>
-
         <video
                 class="col-span-12 absolute top-0 left-0 w-full h-full object-cover z-0"
                 src="/BackgroundHomeRafael.mp4"
@@ -17,14 +15,6 @@
         </div>
     </div>
 
-    <script src="/particles.js" client:load></script>
-    <script client:load>
-        document.addEventListener('DOMContentLoaded', () => {
-            particlesJS.load('particles-js', '/particles.json', function() {
-                console.log('callback - particles.js config loaded');
-            });
-        });
-    </script>
 </section>
 
 <style>
