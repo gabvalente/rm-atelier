@@ -1,20 +1,21 @@
 ---
-// Footer.astro
 ---
 
-<footer class="flex flex-col items-center w-full gap-20 py-20 relative bg-white">
 
+<footer class="bg-white text-black py-10 md:py-20">
+    <div class="container mx-auto px-4 md:px-6 lg:px-8">
+        <div class="border-t border-gray-300"></div>
 
-    <div class="w-full border-t border-black"></div>
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 mt-6 md:mt-8">
+            <p class="font-light text-sm md:text-base">© 2023 Atelier Rafael Monteiro. All rights reserved.</p>
 
-    <div class="flex items-start gap-6">
+            <img src="/Logo.svg" alt="Logo" class="h-8 md:h-10" />
 
-        <p class="text-black font-light">© 2023 Atelier Rafael Monteiro. All rights reserved.</p>
-        <img src="/Logo.svg" alt="Logo" class="h-6" />
-        <div class="flex gap-6">
-            <div class="underline text-black">Privacy Policy</div>
-            <div class="underline text-black">Terms and Conditions</div>
-            <div class="underline text-black">Cookie Policy</div>
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6 text-sm md:text-base">
+                <a href="/privacy-policy" class="hover:text-gray-600 underline">Privacy Policy</a>
+                <a href="/terms" class="hover:text-gray-600 underline">Terms and Conditions</a>
+                <a href="/cookies" class="hover:text-gray-600 underline">Cookie Policy</a>
+            </div>
         </div>
     </div>
 </footer>
