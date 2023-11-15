@@ -5,6 +5,8 @@ import Header from '../components/Header.astro';
 import Footer from "../components/Footer.astro";
 import Contact from "../components/Contact.astro";
 import { Image } from "astro:assets";
+import img2 from '../images/img2.jpg';
+import img3 from '../images/img3.jpg';
 import img4 from '../images/img4.jpg';
 import img5 from '../images/img5.jpg';
 ---
@@ -81,8 +83,8 @@ import img5 from '../images/img5.jpg';
 
 					<!-- Additional Images in a More Dynamic Layout -->
 					<div class="col-span-6 md:col-span-3 lg:col-span-3">
-						<img src="/src/images/img2.jpg" alt="Project 2" class="w-full h-64 object-cover rounded-lg shadow-lg mb-8"/>
-						<img src="/src/images/img3.jpg" alt="Project 3" class="w-full h-80 object-cover rounded-lg shadow-lg"/>
+						<Image src={img2} alt="Project 2" class="w-full h-64 object-cover rounded-lg shadow-lg mb-8"/>
+						<Image src={img3} alt="Project 3" class="w-full h-80 object-cover rounded-lg shadow-lg"/>
 					</div>
 
 					<div class="col-span-6 md:col-span-2 lg:col-span-3">
@@ -91,13 +93,13 @@ import img5 from '../images/img5.jpg';
 					</div>
 
 					<div class="col-span-6 md:col-span-2 lg:col-span-4">
-						<img src="/src/images/img4.jpg" alt="Project 4" class="w-full h-64 object-cover rounded-lg shadow-lg mb-8"/>
-						<img src="/src/images/img5.jpg" alt="Project 5" class="w-full h-80 object-cover rounded-lg shadow-lg"/>
+						<Image src={img4} alt="Project 4" class="w-full h-80 object-cover rounded-lg shadow-lg mb-8"/>
+						<Image src={img5} alt="Project 5" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
 					</div>
 
 					<div class="col-span-6 md:col-span-3 lg:col-span-2">
-						<img src="/src/images/img2.jpg" alt="Project 2" class="w-full h-80 object-cover rounded-lg shadow-lg mb-8"/>
-						<img src="/src/images/img3.jpg" alt="Project 3" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
+						<Image src={img2} alt="Project 2" class="w-full h-64 object-cover rounded-lg shadow-lg mb-8"/>
+						<Image src={img3} alt="Project 3" class="w-full h-80 object-cover rounded-lg shadow-lg"/>
 					</div>
 				</div>
 			</div>
