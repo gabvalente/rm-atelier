@@ -4,17 +4,15 @@ import Nav from '../components/Nav.astro';
 import Header from '../components/Header.astro';
 import Footer from "../components/Footer.astro";
 import Contact from "../components/Contact.astro";
-// noinspection ES6UnusedImports
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import img4 from '../images/img4.jpg';
-
+import img5 from '../images/img5.jpg';
 ---
 
 <Layout title="Atelier Rafael Monteiro">
 	<main>
 		<Nav />
 		<Header />
-
 		<!-- Feature Section -->
 		<section class="container mx-auto px-8 py-24 text-center">
 			<h2 class="text-3xl font-bold mb-6">Rafael Monteiro - Craftsman and Visionary</h2>
@@ -89,7 +87,7 @@ import img4 from '../images/img4.jpg';
 
 					<div class="col-span-6 md:col-span-2 lg:col-span-3">
 						<Image src={img4} alt="Project 4" class="w-full h-80 object-cover rounded-lg shadow-lg mb-8"/>
-						<img src="/src/images/img5.jpg" alt="Project 5" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
+						<Image src={img5} alt="Project 5" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
 					</div>
 
 					<div class="col-span-6 md:col-span-2 lg:col-span-4">
@@ -101,9 +99,6 @@ import img4 from '../images/img4.jpg';
 						<img src="/src/images/img2.jpg" alt="Project 2" class="w-full h-80 object-cover rounded-lg shadow-lg mb-8"/>
 						<img src="/src/images/img3.jpg" alt="Project 3" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
 					</div>
-
-
-
 				</div>
 			</div>
 		</section>
