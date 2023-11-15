@@ -1,0 +1,39 @@
+---
+import {Image} from "astro:assets";
+import img2 from '../images/img2.jpg';
+import img3 from '../images/img3.jpg';
+import img4 from '../images/img4.jpg';
+import img5 from '../images/img5.jpg';
+
+---
+
+<!-- Gallery Section -->
+<section class="gallery bg-custom-gray-3 py-24">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Past Projects</h2>
+            <p class="mb-8 text-lg text-gray-600">Discover the creativity and craftsmanship in each of Rafael Monteiro's works.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <!-- Additional Images in a More Dynamic Layout -->
+            <div class="col-span-6 md:col-span-3 lg:col-span-3">
+                <Image src={img2} alt="Project 2" class="w-full h-64 object-cover rounded-lg shadow-lg mb-8"/>
+                <Image src={img3} alt="Project 3" class="w-full h-80 object-cover rounded-lg shadow-lg"/>
+            </div>
+            <div class="col-span-6 md:col-span-2 lg:col-span-3">
+                <Image src={img4} alt="Project 4" class="w-full h-80 object-cover rounded-lg shadow-lg mb-8"/>
+                <Image src={img5} alt="Project 5" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
+            </div>
+            <div class="col-span-6 md:col-span-2 lg:col-span-4">
+                <Image src={img4} alt="Project 4" class="w-full h-80 object-cover rounded-lg shadow-lg mb-8"/>
+                <Image src={img5} alt="Project 5" class="w-full h-64 object-cover rounded-lg shadow-lg"/>
+            </div>
+
+            <div class="col-span-6 md:col-span-3 lg:col-span-2">
+                <Image src={img2} alt="Project 2" class="w-full h-64 object-cover rounded-lg shadow-lg mb-8"/>
+                <Image src={img3} alt="Project 3" class="w-full h-80 object-cover rounded-lg shadow-lg"/>
+            </div>
+        </div>
+    </div>
+</section>
