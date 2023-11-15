@@ -1,26 +1,43 @@
----
-// Header.astro
-
----
-
 <section class="relative w-full h-screen overflow-hidden">
-    <video
-            class="absolute top-0 left-0 w-full h-full object-cover"
-            src="/BackgroundHomeRafael.mp4"
-            autoplay
-            loop
-            muted
-            playsinline >
-    </video>
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 h-full grid grid-cols-12">
+        <div id="particles-js" class="col-span-12 absolute top-0 left-0 w-full h-full z-10"></div>
 
-    <div class="absolute bottom-8 left-8 md:left-32 w-full">
-        <h1 class="text-6xl lg:text-8xl md:text-7xl  font-light text-custom-gray-3 mb-2 header-shadow">Atelier</h1>
-        <h2 class="text-7xl lg:text-9xl md:text-8xl  font-light text-custom-gray-3 header-shadow">Rafael Monteiro</h2>
+        <video
+                class="col-span-12 absolute top-0 left-0 w-full h-full object-cover z-0"
+                src="/BackgroundHomeRafael.mp4"
+                autoplay
+                loop
+                muted
+                playsinline>
+        </video>
+
+        <div class="col-span-12 absolute bottom-8 left-8 md:left-32 w-full z-20">
+            <h1 class="text-6xl lg:text-8xl md:text-7xl font-light text-custom-gray-3 mb-2 header-shadow">Atelier</h1>
+            <h2 class="text-7xl lg:text-9xl md:text-8xl font-light text-custom-gray-3 header-shadow">Rafael Monteiro</h2>
+        </div>
     </div>
+
+    <script src="/particles.js" client:load></script>
+    <script client:load>
+        document.addEventListener('DOMContentLoaded', () => {
+            particlesJS.load('particles-js', '/particles.json', function() {
+                console.log('callback - particles.js config loaded');
+            });
+        });
+    </script>
 </section>
 
 <style>
     .header-shadow {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10; /* Ensure it's above the video but below the text */
     }
 </style>
