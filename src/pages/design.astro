@@ -7,13 +7,12 @@ import Footer from "../components/Footer.astro";
 // Fetch data from Strapi
 async function fetchDesignItems() {
     const response = await fetch('http://127.0.0.1:1337/api/design-assets?populate=*');
-    if (response.ok) {
-        const data = await response.json();
-        return data.data;
-    } else {
+    if (!response.ok) {
         console.error('Failed to fetch design items:', response.statusText);
         return [];
     }
+    const data = await response.json();
+    return data.data || [];
 }
 
 const designItems = await fetchDesignItems();
@@ -34,9 +33,9 @@ const designItems = await fetchDesignItems();
                 <!-- Grid for Design Items -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {designItems.map(item => (
-                            <div key={item.id} class="design-item cursor-pointer" onclick={`openLightbox(${item.id})`}>
-                                {item.attributes.cover && (
-                                        <img src={item.attributes.cover.data.attributes.url} alt={item.attributes.title} class="w-auto h-auto" />
+                            <div key={item.id} class="design-item cursor-pointer" data-images={JSON.stringify(item.attributes.images.data)}>
+                                {item.attributes.cover.data && (
+                                        <img src={item.attributes.cover.data.attributes.url} alt={item.attributes.title} class="w-full h-auto" />
                                 )}
                                 <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
                                 <p class="text-gray-600">{item.attributes.description}</p>
@@ -49,8 +48,10 @@ const designItems = await fetchDesignItems();
         <!-- Lightbox Structure -->
         <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
             <div class="lightbox-content max-w-3xl max-h-full p-4 bg-white">
-                <!-- Dynamic image and navigation buttons here -->
-
+                <img id="lightbox-img" src="" alt="Selected Image" class="max-w-full max-h-full" />
+                <button id="prev-btn">Prev</button>
+                <button id="next-btn">Next</button>
+                <button id="close-btn">Close</button>
             </div>
         </div>
 
@@ -58,15 +59,49 @@ const designItems = await fetchDesignItems();
     </main>
 </Layout>
 
-<script>
-    function closeLightbox() {
-        document.getElementById('lightbox').classList.add('hidden');
-    }
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const designItems = document.querySelectorAll('.design-item');
+        let currentImageIndex = 0;
+        let images = [];
 
-    // Attach close event listener
-    document.getElementById('lightbox').addEventListener('click', e => {
-        if (e.target.id === 'lightbox') {
-            closeLightbox();
+        designItems.forEach(item => {
+            item.addEventListener('click', function() {
+                images = JSON.parse(this.getAttribute('data-images'));
+                currentImageIndex = 0;
+                updateLightboxImage();
+                document.getElementById('lightbox').classList.remove('hidden');
+            });
+        });
+
+        function updateLightboxImage() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = images[currentImageIndex]?.attributes?.url || '';
+            lightboxImg.alt = images[currentImageIndex]?.attributes?.name || 'Image';
         }
+
+        document.getElementById('prev-btn').addEventListener('click', function() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateLightboxImage();
+            }
+        });
+
+        document.getElementById('next-btn').addEventListener('click', function() {
+            if (currentImageIndex < images.length - 1) {
+                currentImageIndex++;
+                updateLightboxImage();
+            }
+        });
+
+        document.getElementById('close-btn').addEventListener('click', function() {
+            document.getElementById('lightbox').classList.add('hidden');
+        });
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target.id === 'lightbox') {
+                this.classList.add('hidden');
+            }
+        });
     });
 </script>
