@@ -3,10 +3,11 @@
 import Layout from '../layouts/PageLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Fetch data from Strapi
 async function fetchDesignItems() {
-    const response = await fetch('http://127.0.0.1:1337/api/design-assets?populate=*');
+    const response = await fetch(`${API_BASE_URL}/api/design-assets?populate=*`);
     if (!response.ok) {
         console.error('Failed to fetch design items:', response.statusText);
         return [];
@@ -14,6 +15,7 @@ async function fetchDesignItems() {
     const data = await response.json();
     return data.data || [];
 }
+
 
 const designItems = await fetchDesignItems();
 ---
