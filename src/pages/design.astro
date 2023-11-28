@@ -32,9 +32,9 @@ const designItems = await fetchDesignItems();
 
                 <!-- Grid for Design Items -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {designItems.map(item => (
+                    {designItems.map((item) => (
                             <div key={item.id} class="design-item cursor-pointer" data-images={JSON.stringify(item.attributes.images.data)}>
-                                {item.attributes.cover.data && (
+                                {item.attributes.cover?.data && (
                                         <img src={item.attributes.cover.data.attributes.url} alt={item.attributes.title} class="w-full h-auto" />
                                 )}
                                 <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
