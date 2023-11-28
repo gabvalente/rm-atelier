@@ -3,7 +3,7 @@
 import Layout from '../layouts/PageLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
 
 // Fetch data from Strapi
 async function fetchDesignItems() {
@@ -15,7 +15,6 @@ async function fetchDesignItems() {
     const data = await response.json();
     return data.data || [];
 }
-
 
 const designItems = await fetchDesignItems();
 ---
