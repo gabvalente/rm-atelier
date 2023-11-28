@@ -3,7 +3,9 @@
 import Layout from '../layouts/PageLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
-const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
+
+// Determine the correct API base URL
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL || import.meta.env.STRAPI_CLOUD_BASE_URL || 'http://localhost:1337';
 
 // Fetch data from Strapi
 async function fetchDesignItems() {
