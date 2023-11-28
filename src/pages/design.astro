@@ -1,8 +1,24 @@
 ---
+// Import necessary modules
 import Layout from '../layouts/PageLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
+
+// Fetch data from Strapi
+async function fetchDesignItems() {
+    const response = await fetch('http://127.0.0.1:1337/api/design-assets?populate=*');
+    if (response.ok) {
+        const data = await response.json();
+        return data.data; // Adjust based on the structure of the response
+    } else {
+        console.error('Failed to fetch design items:', response.statusText);
+        return [];
+    }
+}
+
+const designItems = await fetchDesignItems();
 ---
+
 
 <Layout title="Rafael Monteiro - Design">
     <main>
@@ -15,14 +31,25 @@ import Footer from "../components/Footer.astro";
                     <h2 class="text-3xl font-bold mb-4">Design Gallery</h2>
                     <p class="mb-8 text-lg text-gray-600">Explore Rafael's unique designs and furniture pieces.</p>
                 </div>
+
+                <!-- Grid for Design Items -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {/* Images populated from CMS */}
-                    {/* This will be dynamic content */}
+                    {designItems.map(item => (
+                            <div key={item.id} class="design-item">
+                                {item.attributes.cover && (
+                                        <img src={item.attributes.cover.data.attributes.url} alt={item.attributes.title} class="w-auto h-auto" />
+                                )}
+                                <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
+                                <p class="text-gray-600">{item.attributes.description}</p>
+                            </div>
+                    ))}
                 </div>
+
+                <br>
             </div>
         </section>
-
 
         <Footer />
     </main>
 </Layout>
+
