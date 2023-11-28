@@ -32,9 +32,9 @@ const designItems = await fetchDesignItems();
 
                 <!-- Grid for Design Items -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {designItems.map((item) => (
-                            <div key={item.id} class="design-item cursor-pointer" data-images={JSON.stringify(item.attributes.images.data)}>
-                                {item.attributes.cover?.data && (
+                    {designItems.map(item => (
+                            <div class="design-item cursor-pointer" data-images={JSON.stringify(item.attributes.images.data)}>
+                                {item.attributes.cover.data && (
                                         <img src={item.attributes.cover.data.attributes.url} alt={item.attributes.title} class="w-full h-auto" />
                                 )}
                                 <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
@@ -60,48 +60,46 @@ const designItems = await fetchDesignItems();
 </Layout>
 
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        const designItems = document.querySelectorAll('.design-item');
-        let currentImageIndex = 0;
-        let images = [];
+    const designItems = document.querySelectorAll('.design-item');
+    let currentImageIndex = 0;
+    let images = [];
 
-        designItems.forEach(item => {
-            item.addEventListener('click', function() {
-                images = JSON.parse(this.getAttribute('data-images'));
-                currentImageIndex = 0;
-                updateLightboxImage();
-                document.getElementById('lightbox').classList.remove('hidden');
-            });
+    designItems.forEach(item => {
+        item.addEventListener('click', function() {
+            images = JSON.parse(this.getAttribute('data-images'));
+            currentImageIndex = 0;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.remove('hidden');
         });
+    });
 
-        function updateLightboxImage() {
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = images[currentImageIndex]?.attributes?.url || '';
-            lightboxImg.alt = images[currentImageIndex]?.attributes?.name || 'Image';
+    function updateLightboxImage() {
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = images[currentImageIndex]?.attributes?.url || '';
+        lightboxImg.alt = images[currentImageIndex]?.attributes?.name || 'Image';
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            updateLightboxImage();
         }
+    });
 
-        document.getElementById('prev-btn').addEventListener('click', function() {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-                updateLightboxImage();
-            }
-        });
+    document.getElementById('next-btn').addEventListener('click', function() {
+        if (currentImageIndex < images.length - 1) {
+            currentImageIndex++;
+            updateLightboxImage();
+        }
+    });
 
-        document.getElementById('next-btn').addEventListener('click', function() {
-            if (currentImageIndex < images.length - 1) {
-                currentImageIndex++;
-                updateLightboxImage();
-            }
-        });
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('lightbox').classList.add('hidden');
+    });
 
-        document.getElementById('close-btn').addEventListener('click', function() {
-            document.getElementById('lightbox').classList.add('hidden');
-        });
-
-        document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target.id === 'lightbox') {
-                this.classList.add('hidden');
-            }
-        });
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target.id === 'lightbox') {
+            this.classList.add('hidden');
+        }
     });
 </script>
