@@ -5,11 +5,11 @@ import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
 
 // Determine the correct API base URL
-const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL || import.meta.env.STRAPI_CLOUD_BASE_URL || 'http://localhost:1337';
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost:1337';
 
 // Fetch data from Strapi
 async function fetchDesignItems() {
-    const response = await fetch(`${API_BASE_URL}/api/design-assets?populate=*`);
+    const response = await fetch(`${API_BASE_URL}/api/design-items?populate=*`);
     if (!response.ok) {
         console.error('Failed to fetch design items:', response.statusText);
         return [];
@@ -36,9 +36,10 @@ const designItems = await fetchDesignItems();
                 <!-- Grid for Design Items -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {designItems.map(item => (
-                            <div class="design-item cursor-pointer" data-images={JSON.stringify(item.attributes.images.data)}>
-                                {item.attributes.cover.data && (
-                                        <img src={item.attributes.cover.data.attributes.url} alt={item.attributes.title} class="w-full h-auto" />
+                            <div class="design-item cursor-pointer"
+                                 data-images={JSON.stringify(item.attributes.images?.data?.map(image => image.attributes.url) || [])}>
+                                {item.attributes.coverImage?.data && (
+                                        <img src={item.attributes.coverImage.data.attributes.url} alt={item.attributes.title} class="w-full h-auto" />
                                 )}
                                 <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
                                 <p class="text-gray-600">{item.attributes.description}</p>
@@ -63,11 +64,11 @@ const designItems = await fetchDesignItems();
 </Layout>
 
 <script type="text/javascript">
-    const designItems = document.querySelectorAll('.design-item');
+    const designItemsElements = document.querySelectorAll('.design-item');
     let currentImageIndex = 0;
     let images = [];
 
-    designItems.forEach(item => {
+    designItemsElements.forEach(item => {
         item.addEventListener('click', function() {
             images = JSON.parse(this.getAttribute('data-images'));
             currentImageIndex = 0;
@@ -78,8 +79,8 @@ const designItems = await fetchDesignItems();
 
     function updateLightboxImage() {
         const lightboxImg = document.getElementById('lightbox-img');
-        lightboxImg.src = images[currentImageIndex]?.attributes?.url || '';
-        lightboxImg.alt = images[currentImageIndex]?.attributes?.name || 'Image';
+        lightboxImg.src = images[currentImageIndex] || '';
+        lightboxImg.alt = `Image ${currentImageIndex + 1}`;
     }
 
     document.getElementById('prev-btn').addEventListener('click', function() {
