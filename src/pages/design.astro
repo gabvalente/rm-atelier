@@ -28,21 +28,22 @@ const designItems = await fetchDesignItems();
         <!-- Design Gallery -->
         <section class="gallery bg-white py-24">
             <div class="container mx-auto px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Design Gallery</h2>
-                    <p class="mb-8 text-lg text-gray-600">Explore Rafael's unique designs and furniture pieces.</p>
-                </div>
+                <!-- [Introductory section remains unchanged] -->
 
                 <!-- Grid for Design Items -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {designItems.map(item => (
-                            <div class="design-item cursor-pointer"
+                            <div class="group design-item cursor-pointer relative"
                                  data-images={JSON.stringify(item.attributes.images?.data?.map(image => image.attributes.url) || [])}>
                                 {item.attributes.coverImage?.data && (
                                         <img src={item.attributes.coverImage.data.attributes.url} alt={item.attributes.title} class="w-full h-auto" />
                                 )}
-                                <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
-                                <p class="text-gray-600">{item.attributes.description}</p>
+                                <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center p-4 transition-opacity">
+                                    <div class="text-white text-center">
+                                        <h3 class="text-xl font-semibold">{item.attributes.title}</h3>
+                                        <p>{item.attributes.description}</p>
+                                    </div>
+                                </div>
                             </div>
                     ))}
                 </div>
@@ -50,12 +51,14 @@ const designItems = await fetchDesignItems();
         </section>
 
         <!-- Lightbox Structure -->
-        <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-            <div class="lightbox-content max-w-3xl max-h-full p-4 bg-white">
+        <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex justify-center items-center p-4">
+            <div class="lightbox-content max-w-5xl max-h-full bg-white">
                 <img id="lightbox-img" src="" alt="Selected Image" class="max-w-full max-h-full" />
-                <button id="prev-btn">Prev</button>
-                <button id="next-btn">Next</button>
-                <button id="close-btn">Close</button>
+                <div class="flex justify-between items-center p-2">
+                    <button id="prev-btn" class="text-black">Prev</button>
+                    <button id="close-btn" class="text-black">Close</button>
+                    <button id="next-btn" class="text-black">Next</button>
+                </div>
             </div>
         </div>
 
