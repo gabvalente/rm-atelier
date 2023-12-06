@@ -1,13 +1,22 @@
 ---
-import { Image } from 'astro:assets';
-const { item } = Astro.props;
+import { Picture } from 'astro:assets';
+const { item, className } = Astro.props;
+import { fetchDesignGallery } from '../utils/fetchDesignGallery.js';
+const designItems = await fetchDesignGallery();
 ---
 
-<div class="group design-item cursor-pointer relative"
+<div class={`group design-item cursor-pointer relative ${className}`}
      data-images={JSON.stringify(item.attributes.images?.data?.map(image => image.attributes.url) || [])}>
     {item.attributes.coverImage?.data && (
-            <Image src={item.attributes.coverImage.data.attributes.url} alt={item.attributes.title}
-                   width={500} height={500} loading="lazy" />
+            <Picture
+                    class="h-full w-full object-cover"
+                    src={item.attributes.coverImage.data.attributes.url}
+                    alt={item.attributes.title}
+                    width={500}
+                    height={500}
+    widths={[310, 324, 327]}
+    sizes="(max-width:640px) 327px,(max-width:1079px) 324px,(min-width:1080px) 310px"
+    />
     )}
     <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center p-4 transition-opacity">
         <div class="text-white text-center">
