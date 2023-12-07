@@ -4,19 +4,21 @@ import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
 import { fetchDesignGallery } from '../utils/fetchDesignGallery.js';
 import DesignGallery from "../components/DesignGallery.astro";
-const designItems = await fetchDesignGallery();
+const designGallery = await fetchDesignGallery();
 ---
 
 <Layout title="Rafael Monteiro - Design">
     <main>
         <Nav />
         <!-- Design Gallery -->
-        <section class="gallery bg-white py-24">
-            <div class="container mx-auto px-8">
-                <!-- Grid for Design Gallery -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {designItems.map(item => (
-                            <DesignGallery item={item} />
+        <section class="gallery bg-white py-28">
+            <div class="mansory-container"> <!-- Ensures centering of the container -->
+                <div id="masonry-grid" class="max-w-7xl mx-10 p-2"> <!-- Sets max-width and centers the grid -->
+                    <!-- Grid Sizer for Masonry -->
+                    <div class="grid-sizer w-1/5"></div> <!-- Adjust the width to control column size -->
+                    <!-- Gallery Items -->
+                    {designGallery.map((item) => (
+                            <DesignGallery item={item} key={item.id} />
                     ))}
                 </div>
             </div>
@@ -25,6 +27,41 @@ const designItems = await fetchDesignGallery();
     </main>
 </Layout>
 
-<script type="text/javascript">
+<style>
+    #masonry-grid .grid-sizer {
+        width: 25%;
+    }
+</style>
 
+
+<script type="module">
+    import Masonry from 'https://cdn.skypack.dev/masonry-layout@4';
+    import imagesLoaded from 'https://cdn.skypack.dev/imagesloaded@4';
+
+    // Wait for images to load
+    window.addEventListener('load', () => {
+        const masonryGrid = document.querySelector('#masonry-grid');
+        if (!masonryGrid) {
+            console.error('Masonry grid not found');
+            return;
+        }
+
+        // Initialize Masonry after all images have loaded
+        imagesLoaded(masonryGrid, function() {
+            new Masonry(masonryGrid, {
+                itemSelector: '.design-item', // Ensure this matches your item class
+                columnWidth: '.grid-sizer',  // Use the .grid-sizer for columnWidth
+                percentPosition: true,       // Use percent for item position to work well with responsive design
+                gutter: 8,                   // Spacing between items
+                fitWidth: true,              // Centers the items within the masonry container
+                // transitionDuration: '0.3s',  // CSS transition duration
+                resize: true,                // Re-layout grid on window resize
+            });
+        });
+    });
 </script>
+
+
+
+
+
