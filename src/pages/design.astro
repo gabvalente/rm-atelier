@@ -11,11 +11,11 @@ const designGallery = await fetchDesignGallery();
     <main>
         <Nav />
         <!-- Design Gallery -->
-        <section class="gallery bg-white py-28">
+        <section class="gallery bg-white py-32">
             <div class="mansory-container"> <!-- Ensures centering of the container -->
-                <div id="masonry-grid" class="max-w-7xl mx-10 p-2"> <!-- Sets max-width and centers the grid -->
+                <div id="masonry-grid" class="max-w-6xl mx-24 p-2"> <!-- Sets max-width and centers the grid -->
                     <!-- Grid Sizer for Masonry -->
-                    <div class="grid-sizer w-1/5"></div> <!-- Adjust the width to control column size -->
+                    <div class="grid-sizer"></div> <!-- Adjust the width to control column size -->
                     <!-- Gallery Items -->
                     {designGallery.map((item) => (
                             <DesignGallery item={item} key={item.id} />
@@ -28,9 +28,34 @@ const designGallery = await fetchDesignGallery();
 </Layout>
 
 <style>
-    #masonry-grid .grid-sizer {
-        width: 25%;
+    /* Responsive column sizes */
+    .grid-sizer,
+    .design-item {
+        width: 25%; /* 5 columns by default */
     }
+
+    /* 3 columns for tablet */
+    @media (max-width: 768px) {
+        .grid-sizer,
+        .design-item { width: 33.333%; }
+    }
+
+    /* 2 columns for mobile */
+    @media (max-width: 480px) {
+        .grid-sizer,
+        .design-item { width: 50%; }
+    }
+
+    /* Margin and padding as needed */
+    .grid-item {
+        margin-bottom: 10px; /* space between rows */
+    }
+
+    /* Centering the grid */
+    .grid {
+        margin: 0 auto;
+    }
+
 </style>
 
 
