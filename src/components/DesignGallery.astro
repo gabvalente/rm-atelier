@@ -3,7 +3,7 @@ import { Picture } from 'astro:assets';
 const { item, className } = Astro.props;
 ---
 
-<div class="design-item mx-auto h-auto w-auto sm:w-1/2 md:w-1/4 lg:w-1/4 p-2">
+<div class="design-item mx-auto h-auto w-auto">
     {item.attributes.coverImage?.data && (
             <Picture
                     class="object-contain mx-auto h-auto w-auto"

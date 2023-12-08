@@ -12,78 +12,21 @@ const designGallery = await fetchDesignGallery();
         <Nav />
         <!-- Design Gallery -->
         <section class="gallery bg-white py-32">
-            <div class="mansory-container"> <!-- Ensures centering of the container -->
-                <div id="masonry-grid" class="max-w-6xl mx-24 p-2"> <!-- Sets max-width and centers the grid -->
-                    <!-- Grid Sizer for Masonry -->
-                    <div class="grid-sizer"></div> <!-- Adjust the width to control column size -->
                     <!-- Gallery Items -->
                     {designGallery.map((item) => (
                             <DesignGallery item={item} key={item.id} />
                     ))}
-                </div>
-            </div>
         </section>
         <Footer />
     </main>
 </Layout>
 
 <style>
-    /* Responsive column sizes */
-    .grid-sizer,
-    .design-item {
-        width: 25%; /* 5 columns by default */
-    }
-
-    /* 3 columns for tablet */
-    @media (max-width: 768px) {
-        .grid-sizer,
-        .design-item { width: 33.333%; }
-    }
-
-    /* 2 columns for mobile */
-    @media (max-width: 480px) {
-        .grid-sizer,
-        .design-item { width: 50%; }
-    }
-
-    /* Margin and padding as needed */
-    .grid-item {
-        margin-bottom: 10px; /* space between rows */
-    }
-
-    /* Centering the grid */
-    .grid {
-        margin: 0 auto;
-    }
 
 </style>
 
+<script>
 
-<script type="module">
-    import Masonry from 'https://cdn.skypack.dev/masonry-layout@4';
-    import imagesLoaded from 'https://cdn.skypack.dev/imagesloaded@4';
-
-    // Wait for images to load
-    window.addEventListener('load', () => {
-        const masonryGrid = document.querySelector('#masonry-grid');
-        if (!masonryGrid) {
-            console.error('Masonry grid not found');
-            return;
-        }
-
-        // Initialize Masonry after all images have loaded
-        imagesLoaded(masonryGrid, function() {
-            new Masonry(masonryGrid, {
-                itemSelector: '.design-item', // Ensure this matches your item class
-                columnWidth: '.grid-sizer',  // Use the .grid-sizer for columnWidth
-                percentPosition: true,       // Use percent for item position to work well with responsive design
-                gutter: 8,                   // Spacing between items
-                fitWidth: true,              // Centers the items within the masonry container
-                // transitionDuration: '0.3s',  // CSS transition duration
-                resize: true,                // Re-layout grid on window resize
-            });
-        });
-    });
 </script>
 
 
