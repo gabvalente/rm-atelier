@@ -1,4 +1,5 @@
 ---
+// Existing imports
 import Layout from '../layouts/PageLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
@@ -11,25 +12,49 @@ const designGallery = await fetchDesignGallery();
     <main>
         <Nav />
         <!-- Design Gallery -->
-        <section class="gallery bg-white py-32">
-                    <!-- Gallery Items -->
-                    {designGallery.map((item) => (
-                            <DesignGallery item={item} key={item.id} />
-                    ))}
+        <section class="bg-white py-32">
+            <!-- Increased the max width to 8xl and reduced the horizontal padding -->
+            <div class="gallery max-w-8xl mx-16 my-8 px-2 sm:px-4 lg:px-6" id="macy-container">
+                {designGallery.map((item) => (
+                        <DesignGallery item={item} key={item.id} />
+                ))}
+            </div>
         </section>
         <Footer />
     </main>
 </Layout>
 
 <style>
+    /* Apply consistent margins and padding */
+    .gallery {
+        /* Padding adjusted by Tailwind classes in the markup above */
+    }
 
+    .design-item {
+        /* Margin bottom is handled by Macy.js's margin option */
+        /* If you need more specific control over the design item's margin, you can add it here */
+    }
 </style>
 
 <script>
+    import Macy from 'macy'; // Import Macy if using npm, otherwise use a script tag for CDN
 
+    // Initialize Macy.js
+    document.addEventListener('DOMContentLoaded', function () {
+        Macy({
+            container: '#macy-container',
+            columns: 5,
+            margin: {
+                x: 12, // Slightly reduced horizontal margin
+                y: 24,
+            },
+            breakAt: {
+                1200: 4,
+                940: 3,
+                520: 2,
+                400: 1
+            },
+            waitForImages: true,
+        });
+    });
 </script>
-
-
-
-
-
