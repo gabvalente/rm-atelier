@@ -53,7 +53,10 @@ const designGallery = await fetchDesignGallery();
         // Function to show the items
         function showItems() {
             const items = document.querySelectorAll('.design-item');
-            items.forEach(item => item.style.display = 'block'); // Change to the desired display style
+            items.forEach(item => {
+                // Directly modify the display style without type casting
+                item.style.display = ''; // Change to 'block' or '' based on your layout
+            });
         }
 
         // Show items after Macy has done its initial layout
