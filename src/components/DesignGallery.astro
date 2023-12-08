@@ -5,13 +5,10 @@ const { item, className } = Astro.props;
 
 <div class="design-item mx-auto h-auto w-auto">
     {item.attributes.coverImage?.data && (
-            <Picture
+            <img
                     class="object-contain mx-auto h-auto w-auto"
                     src={item.attributes.coverImage.data.attributes.url}
                     alt={item.attributes.title}
-                    width="200"
-                    height="300"
-                    format="jpeg"
                     loading="lazy"
             />
     )}
