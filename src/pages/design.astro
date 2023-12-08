@@ -25,7 +25,7 @@ const designGallery = await fetchDesignGallery();
 
 <style>
     /* Initially hide items to prevent FOUC */
-    .design-item {
+    .hidden {
         display: none;
     }
 </style>
@@ -53,10 +53,7 @@ const designGallery = await fetchDesignGallery();
         // Function to show the items
         function showItems() {
             const items = document.querySelectorAll('.design-item');
-            items.forEach(item => {
-                // Directly modify the display style without type casting
-                item.style.display = ''; // Change to 'block' or '' based on your layout
-            });
+            items.forEach(item => item.classList.remove('hidden')); // Removing 'hidden' class
         }
 
         // Show items after Macy has done its initial layout
