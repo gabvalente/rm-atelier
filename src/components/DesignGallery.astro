@@ -1,6 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
-const { item, className } = Astro.props;
+const { item } = Astro.props;
 ---
 
 <div class="design-item mx-auto h-auto w-auto">
@@ -10,6 +9,6 @@ const { item, className } = Astro.props;
                     src={item.attributes.coverImage.data.attributes.url}
                     alt={item.attributes.title}
                     loading="lazy"
-            />
+             />
     )}
 </div>

@@ -145,10 +145,20 @@ S
 #src/components/FeatureSection.astro,7/d/7d7b97e1dad4bd763cde229fe3aefe6686576a0a
 L
 src/layouts/PageLayout.astro,2/4/243888bd409b4c768a4317428653a38d7eeb00b0
-L
-src/components/Carrousel.jsx,1/b/1be45f8e6192d5b70c31388af084bde8dfab6769
 4
 .env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+Q
+!src/components/ArchiGallery.astro,e/8/e8690009df8b0550896c3a00affe81d929545e6b
+M
+src/components/Lightbox.astro,2/5/25d9fe417296e08ec18a62eaa9f72ce0f97f6134
+O
+src/utils/fetchDesignGallery.js,b/4/b472b0dce98e524de5f9cc4cb94312904a19d3c0
+@
+astro.config.mjs,2/d/2db36c69fda5f59199980959e108555124daee63
+=
+tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
+R
+"src/components/DesignGallery.astro,6/1/611fe094b58d825f9c4ea5bf704b0bee620bc2b5

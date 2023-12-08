@@ -23,12 +23,18 @@ const designGallery = await fetchDesignGallery();
     </main>
 </Layout>
 
+<style>
+    /* Initially hide items to prevent FOUC */
+    .design-item {
+        display: none;
+    }
+</style>
 
 <script>
     import Macy from 'macy';
 
     document.addEventListener('DOMContentLoaded', function () {
-        Macy({
+        const macyInstance = Macy({
             container: '#macy-container',
             columns: 5,
             margin: {
@@ -43,5 +49,19 @@ const designGallery = await fetchDesignGallery();
             },
             waitForImages: true,
         });
+
+        // Function to show the items
+        function showItems() {
+            const items = document.querySelectorAll('.design-item');
+            items.forEach(item => item.style.display = 'block'); // Change to the desired display style
+        }
+
+        // Show items after Macy has done its initial layout
+        macyInstance.runOnImageLoad(function () {
+            showItems();
+        }, true);
+
+        // Fallback for cached images
+        window.onload = showItems;
     });
 </script>
