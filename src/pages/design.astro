@@ -14,8 +14,11 @@ const designGallery = await fetchDesignGallery();
         <section class="bg-white py-32">
             <div class="gallery max-w-8xl mx-16 my-8 px-2 sm:px-4 lg:px-6" id="macy-container">
                 {designGallery.map((item) => (
-                        <div key={item.id}>
+                        <div key={item.id} class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-3xl transition-shadow duration-500 ease-in-out">
                             <DesignGallery client:load item={item} key={item.id} />
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none">
+                                <p class="text-white text-lg md:text-xl lg:text-2xl font-bold pointer-events-none">{item.attributes.title}</p>
+                            </div>
                         </div>
                 ))}
             </div>
@@ -24,14 +27,40 @@ const designGallery = await fetchDesignGallery();
     </main>
 </Layout>
 
-
 <style>
     /* Initially hide items to prevent FOUC */
     .hidden {
         display: none;
     }
-</style>
 
+    /* Enhanced hover effects */
+    .gallery .design-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery .design-item:hover {
+        transform: scale(1.05);
+    }
+
+    /* Styling for image hover overlay */
+    .gallery .design-item .absolute {
+        border-radius: inherit; /* Match the parent's border-radius */
+        z-index: -1; /* Ensure it's behind the clickable image */
+        pointer-events: none; /* Make it ignore mouse events */
+    }
+
+    /* Title overlay styling */
+    .gallery .design-item .absolute div {
+        transition: background-color 0.3s ease, opacity 0.3s ease;
+        pointer-events: auto; /* Enable pointer events for the title */
+    }
+
+    @media (max-width: 768px) {
+        .gallery .design-item .absolute div {
+            background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay for small screens */
+        }
+    }
+</style>
 
 <script>
     import Macy from 'macy';
@@ -53,18 +82,18 @@ const designGallery = await fetchDesignGallery();
             waitForImages: true,
         });
 
-        // Function to show the items
-        function showItems() {
-            const items = document.querySelectorAll('.design-item');
-            items.forEach(item => item.classList.remove('hidden')); // Removing 'hidden' class
-        }
-
-        // Show items after Macy has done its initial layout
+        // Show items after Macy's initial layout
         macyInstance.runOnImageLoad(function () {
-            showItems();
+            const items = document.querySelectorAll('.design-item');
+            items.forEach(item => item.classList.remove('hidden'));
         }, true);
 
         // Fallback for cached images
-        window.onload = showItems;
+        window.onload = function () {
+            const items = document.querySelectorAll('.design-item');
+            items.forEach(item => item.classList.remove('hidden'));
+        };
     });
 </script>
+
+

@@ -1,6 +1,6 @@
 const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost:1337';
 
-function optimizeCloudinaryUrl(url, maxWidth = 300, quality = 'auto:eco', format = 'auto') {
+function optimizeCloudinaryUrl(url, maxWidth = 900, quality = 'auto:eco', format = 'auto') {
     // Optimizing for performance with aggressive quality compression
     return url.replace('/upload/', `/upload/w_${maxWidth},c_limit,f_${format},q_${quality}/`);
 }
