@@ -1,10 +1,9 @@
 ---
-// Existing imports
 import Layout from '../layouts/PageLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from "../components/Footer.astro";
-import { fetchDesignGallery } from '../utils/fetchDesignGallery.js';
-import DesignGallery from "../components/DesignGallery.astro";
+import DesignGallery from '../components/DesignGallery.jsx';
+import {fetchDesignGallery} from "../utils/fetchDesignGallery";
 const designGallery = await fetchDesignGallery();
 ---
 
@@ -15,7 +14,9 @@ const designGallery = await fetchDesignGallery();
         <section class="bg-white py-32">
             <div class="gallery max-w-8xl mx-16 my-8 px-2 sm:px-4 lg:px-6" id="macy-container">
                 {designGallery.map((item) => (
-                        <DesignGallery item={item} key={item.id} />
+                        <div key={item.id}>
+                            <DesignGallery client:load item={item} key={item.id} />
+                        </div>
                 ))}
             </div>
         </section>
@@ -23,12 +24,14 @@ const designGallery = await fetchDesignGallery();
     </main>
 </Layout>
 
+
 <style>
     /* Initially hide items to prevent FOUC */
     .hidden {
         display: none;
     }
 </style>
+
 
 <script>
     import Macy from 'macy';
