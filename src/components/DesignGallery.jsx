@@ -12,7 +12,8 @@ const DesignGallery = ({ item }) => {
         const images = item.images.data.map(image => ({
             src: image.attributes.formats.large.url,
             w: Number(image.attributes.formats.large.width),
-            h: Number(image.attributes.formats.large.height)
+            h: Number(image.attributes.formats.large.height),
+            // Additional data like description can be included here if needed
         }));
 
         if (!lightboxRef.current) {
@@ -21,21 +22,23 @@ const DesignGallery = ({ item }) => {
                 children: 'a',
                 dataSource: images,
                 pswpModule: () => import('photoswipe'),
+                // Only include supported PhotoSwipe options
                 showHideAnimationType: 'fade',
                 mouseMovePan: true,
                 initialZoomLevel: 'fit',
                 secondaryZoomLevel: 1.5,
-                maxZoomLevel: 1,
-                history: false,
                 loop: true,
-                pinchToClose: false,
+                pinchToClose: true,
                 imageClickAction: 'zoom',
                 tapAction: 'zoom',
             });
 
-            new PhotoSwipeDynamicCaption(lightboxRef.current, {
+            const dynamicCaption = new PhotoSwipeDynamicCaption(lightboxRef.current, {
                 type: 'auto',
-                captionContent: () => item.attributes.description,
+                captionContent: (slide) => {
+                    // Fetching description from the item for each image
+                    return item.attributes.description;
+                },
                 mobileLayoutBreakpoint: 600
             });
 
@@ -45,7 +48,7 @@ const DesignGallery = ({ item }) => {
         }
 
         return () => lightboxRef.current?.destroy();
-    }, [item.id, item.images.data]);
+    }, [item.id, item.images.data, item.attributes.description]);
 
     const openPhotoSwipe = () => {
         lightboxRef.current?.loadAndOpen(0);
@@ -61,9 +64,9 @@ const DesignGallery = ({ item }) => {
                     loading="lazy"
                 />
             )}
-            {item.images.data.map((image, index) => (
-                <a key={index} href={image.attributes.formats.large.url} style={{ display: 'none' }} data-pswp-width={image.attributes.formats.large.width} data-pswp-height={image.attributes.formats.large.height}>
-                    <img src={image.attributes.formats.thumbnail.url} alt={`Thumbnail ${index}`} />
+            {item.images.data.map(image => (
+                <a key={image.id} href={image.attributes.formats.large.url} style={{ display: 'none' }} data-pswp-width={image.attributes.formats.large.width} data-pswp-height={image.attributes.formats.large.height}>
+                    <img src={image.attributes.formats.thumbnail.url} alt={`Thumbnail for ${item.attributes.title}`} />
                 </a>
             ))}
         </div>
