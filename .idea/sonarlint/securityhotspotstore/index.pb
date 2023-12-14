@@ -152,13 +152,13 @@ L
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 Q
 !src/components/ArchiGallery.astro,e/8/e8690009df8b0550896c3a00affe81d929545e6b
-M
-src/components/Lightbox.astro,2/5/25d9fe417296e08ec18a62eaa9f72ce0f97f6134
 O
 src/utils/fetchDesignGallery.js,b/4/b472b0dce98e524de5f9cc4cb94312904a19d3c0
 @
 astro.config.mjs,2/d/2db36c69fda5f59199980959e108555124daee63
 =
 tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
-R
-"src/components/DesignGallery.astro,6/1/611fe094b58d825f9c4ea5bf704b0bee620bc2b5
+G
+public/js/initSwiper.js,3/c/3c5df702bde049618f6aed3ab1ac46d141cf7ee5
+P
+ src/components/DesignGallery.jsx,0/7/071d61db5a6c38c66f0d3064a0179a0b2fedf563

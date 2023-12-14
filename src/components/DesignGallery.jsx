@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
 import 'photoswipe/style.css';
-import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
 
 const DesignGallery = ({ item }) => {
     const galleryId = `gallery-${item.id}`;
     const lightboxRef = useRef(null);
 
     useEffect(() => {
-        const images = item.images.data.map(image => ({
+        const images = item.images.data.map((image) => ({
             src: image.attributes.formats.large.url,
             w: Number(image.attributes.formats.large.width),
-            h: Number(image.attributes.formats.large.height)
+            h: Number(image.attributes.formats.large.height),
+            // Optional: Include description or other data here
+            // description: 'Your description here'
         }));
 
         if (!lightboxRef.current) {
@@ -25,18 +25,11 @@ const DesignGallery = ({ item }) => {
                 mouseMovePan: true,
                 initialZoomLevel: 'fit',
                 secondaryZoomLevel: 1.5,
-                maxZoomLevel: 1,
-                history: false,
+                maxZoomLevel: 3,
                 loop: true,
-                pinchToClose: false,
+                pinchToClose: true,
                 imageClickAction: 'zoom',
                 tapAction: 'zoom',
-            });
-
-            new PhotoSwipeDynamicCaption(lightboxRef.current, {
-                type: 'auto',
-                captionContent: () => item.attributes.description, // Use description from the item
-                mobileLayoutBreakpoint: 600
             });
 
             lightboxRef.current.init();
@@ -61,9 +54,9 @@ const DesignGallery = ({ item }) => {
                     loading="lazy"
                 />
             )}
-            {item.images.data.map((image, index) => (
-                <a key={index} href={image.attributes.formats.large.url} style={{ display: 'none' }} data-pswp-width={image.attributes.formats.large.width} data-pswp-height={image.attributes.formats.large.height}>
-                    <img src={image.attributes.formats.thumbnail.url} alt={`Thumbnail ${index}`} />
+            {item.images.data.map((image) => (
+                <a key={image.id} href={image.attributes.formats.large.url} style={{ display: 'none' }} data-pswp-width={image.attributes.formats.large.width} data-pswp-height={image.attributes.formats.large.height}>
+                    <img src={image.attributes.formats.thumbnail.url} alt={`Thumbnail for ${item.attributes.title}`} />
                 </a>
             ))}
         </div>
